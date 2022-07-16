@@ -1,7 +1,5 @@
-# Paragon Bank
+# Banco Digital
 > Banking Website built on Django designed with Bootstrap
-## Demo:
-![](screenshot/bank.png)
 ## Installation:
 **1.Clone Repo**
 ```sh
@@ -18,7 +16,7 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 ```
-**4.Run Server**
+**4.Rode o Servidor**
 ```
 python manage.py runserver
 ```

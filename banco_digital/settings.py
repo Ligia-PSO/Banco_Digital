@@ -23,17 +23,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g^7p5(7v_tr=hefp-2h&qe%nt^o2&0w5^)+e&urdz1a1432na*'
+SECRET_KEY =os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+# APPEND_SLASH = True
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'contas.apps.ContasConfig',
-    'operacoes.apps.OperacoesConfig'
+    'operacoes.apps.OperacoesConfig',
 ]
 
 MIDDLEWARE = [
@@ -78,17 +88,6 @@ WSGI_APPLICATION = 'banco_digital.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'semifinal', 
-#         'USER': 'root', 
-#         'PASSWORD': 'throwaway11', 
-#         'HOST': '127.0.0.1', 
-#         'PORT': '3306', 
-#     }
-    
-# }
 
 DATABASES = {
     'default': {

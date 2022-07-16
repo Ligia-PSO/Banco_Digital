@@ -15,14 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-# from rest_framework import routers
+from rest_framework import routers
 
-# router = routers.DefaultRouter()
-# router.register(r'cliente', ClienteViewset)
+from contas.views.cliente_view import ClienteViewSet
+from contas.views.conta_bancaria_view import ContaBancariaViewSet
+from operacoes.views.movimentacao_view import MovimentacaoViewSet
+from operacoes.views.transferecia_view import ConsultarViewSet, TransferenciaViewSet
 
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'cliente', ClienteViewSet,basename='cliente')
+router.register(r'contabancaria', ContaBancariaViewSet,basename='contabancaria')
+router.register(r'transferencia', TransferenciaViewSet,basename='transferencia')
+router.register(r'movimentacao', MovimentacaoViewSet,basename='movimentacao')
+router.register(r'consultar', ConsultarViewSet,basename='consultar')
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('operacoes/', include('operacoes.urls')),
     # path('contas/', include('contas.urls')),
-    # path('', include(router.urls)),
+    # path('',include('operacoes.urls')),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls'))
 ]

@@ -1,6 +1,15 @@
 from django.contrib import admin
-from operacoes.models import Movimentacao, Transferencia
+from operacoes.models.movimentacao import Movimentacao
+from operacoes.models.transferencia import Transferencia
 
-admin.site.register(Transferencia)
-admin.site.register(Movimentacao)
+class TransferenciaAdmin(admin.ModelAdmin):
+    list_display=('conta','beneficiario','quantidade','data')
+
+class MovimentacaoAdmin(admin.ModelAdmin):
+    list_display=('conta','tipo','quantidade','data')
+    
+   
+
+admin.site.register(Transferencia,TransferenciaAdmin)
+admin.site.register(Movimentacao,MovimentacaoAdmin)
 # Register your models here.
