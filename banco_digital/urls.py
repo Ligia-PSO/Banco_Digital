@@ -37,6 +37,8 @@ router.register(r'consultartransferencia', ConsultarViewSet,basename='consultar'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contabancaria/<int:pk>/transferencias/', ListaTransferenciasViewset.as_view()),
+    # path('contabancaria/<int:pk>/transferencias/recebido', ListaTransferenciasRecebidasViewset.as_view()),
+    # path('contabancaria/<int:pk>/transferencias/enviado', ListaTransferenciasEnviadasViewset.as_view()),
     # path('contabancaria/<int:pk>/transferencias/<str:date1>_<str:date2>', ListaTransferenciasIntervaloViewset.as_view()),
     path('contabancaria/todas', ListaContasBancariasViewset.as_view()),
     path('contabancaria/<int:pk>/saldo', ConsultaContaSaldoViewset.as_view(),name='consultasaldo'),

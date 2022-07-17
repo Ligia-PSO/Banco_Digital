@@ -1,6 +1,6 @@
 from django.db import models
+from contas.models.contabancaria import ContaBancaria
 
-from contas.models.conta import ContaBancaria
 from operacoes.constantes import TIPO_MOVIMENTACAO
 
 class Movimentacao(models.Model):

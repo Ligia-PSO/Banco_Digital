@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from contas.models.cliente import Cliente
-from contas.validators.campo import somente_inteiros, somente_letras
+from contas.validadores import somente_inteiros, somente_letras, validar_cpf_cnpj
+
+
 
 
 class ClienteSerializer(serializers.HyperlinkedModelSerializer):
@@ -11,31 +13,15 @@ class ClienteSerializer(serializers.HyperlinkedModelSerializer):
                             allow_blank=False, allow_null=True,required=False,validators=[somente_inteiros])
     
     nome= serializers.CharField(allow_null=False,validators=[somente_letras])
+    sobrenome=serializers.CharField(allow_null=False,validators=[somente_letras])
     endereco= serializers.CharField(allow_null=False,validators=[somente_letras])
    
     class Meta():
         model = Cliente
-        fields = ['nome','endereco', 'cpf', 'cnpj','tipo']
-        # fields='__all__'
+        fields = ['nome','sobrenome','endereco', 'cpf', 'cnpj','tipo']
 
-    def validate(self, data):#valida cpf and cnpj
-        if (data.get("tipo") == 'PJ'):
-            if (data.get("cnpj") == None ) :
-                raise serializers.ValidationError(
-                    {'cnpj': 'Se é uma pessoa juridica, o cnpj é obrigatorio'})
-
-            if(data.get("cpf")!=None):
-                raise serializers.ValidationError(
-                    {'cpf':'Pessoa juridica nao tem cpf'})
-
-        elif (data.get("tipo") == 'PF'):
-
-            if (data.get("cpf") == None) :
-                 raise serializers.ValidationError(
-                    {'cpf':'Se é uma pessoa física o cpf é obrigatorio'})
-                    
-            if (data.get("cnpj") != None ) :
-                 raise serializers.ValidationError({"cnpj":
-                   'Pessoa física nao tem cnpj'})
+    def validate(self, data):
+        
+        validar_cpf_cnpj(data)
 
         return data

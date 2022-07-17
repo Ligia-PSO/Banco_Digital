@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from rest_framework import viewsets
-from contas.models.conta import ContaBancaria
-from contas.serializers.conta_serializer import ContaBancariaSerializer
+from contas.models.contabancaria import ContaBancaria
+from contas.serializers.contabancaria_serializer import ContaBancariaSerializer
 from rest_framework import viewsets,permissions,filters
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -12,14 +12,14 @@ class ContaBancariaViewSet(viewsets.ModelViewSet):
 
     serializer_class = ContaBancariaSerializer
     queryset = ContaBancaria.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     filter_backends = [
         DjangoFilterBackend,
         filters.OrderingFilter,
         filters.SearchFilter
     ]
-    search_fields = ['conta']
+    search_fields = ['conta','titular']
     
     # def list(self, request):
     #     queryset = ContaBancaria.objects.all()

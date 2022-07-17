@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 
-from contas.models.conta import ContaBancaria
+from contas.models.contabancaria import ContaBancaria
 
 
 class Transferencia(models.Model):
@@ -10,8 +10,7 @@ class Transferencia(models.Model):
     Transfer_id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     beneficiario=models.IntegerField()#conta que irá receber
     data=models.DateField(auto_now_add=True)
-    quantidade=models.DecimalField(decimal_places=2,max_digits=12)
-    tipo = models.CharField(max_length=13, default="enviada")
+    quantidade=models.DecimalField(decimal_places=2,max_digits=12,null=False)
     
     def __str__(self) -> str:
         return '{} {}'.format(self.conta,self.tipo)

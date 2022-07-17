@@ -1,6 +1,6 @@
 
 
-from contas.models.conta import ContaBancaria
+from contas.models.contabancaria import ContaBancaria
 from operacoes.models.movimentacao import Movimentacao
 from operacoes.models.transferencia import Transferencia
 from operacoes.serializers.consulta_serializer import ConsultarSerializer
@@ -9,7 +9,7 @@ from operacoes.serializers.transferencia_serializer import TransferenciaSerializ
 from rest_framework import viewsets,permissions
 from rest_framework.response import Response
 from rest_framework import status
-from contas.models.conta import ContaBancaria
+from contas.models.contabancaria import ContaBancaria
 from django.db.models import Q
 from operacoes.models.transferencia import Transferencia
 from operacoes.serializers.transferencia_serializer import TransferenciaSerializer
@@ -19,7 +19,7 @@ from operacoes.serializers.transferencia_serializer import TransferenciaSerializ
 class ConsultarViewSet(viewsets.ModelViewSet):
     queryset =Movimentacao.objects.all()
     serializer_class = ConsultarSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     
     def list(self, request,):
         return Response({'informe as datas a serem consultadas'},status=status.HTTP_200_OK)
@@ -33,9 +33,17 @@ class ConsultarViewSet(viewsets.ModelViewSet):
 
     def filtrar_transferencias(self,request):
         consulta=request.data
-        if consulta['tipo']=='transferencias':
+        if consulta['tipo']=='todos':
             # Entry.objects.filter(pub_date__range=(start_date, end_date))
             transferencias=Transferencia.objects.filter(Q(beneficiario=consulta['conta'])
             |Q(conta_id=consulta['conta']),data__gte=consulta['data_inicio'],data__lte=consulta['data_fim'])
         
+        elif consulta['tipo']=='recebido':
+            transferencias=Transferencia.objects.filter(beneficiario=consulta['conta']
+            ,data__gte=consulta['data_inicio'],data__lte=consulta['data_fim'])
+
+        elif consulta['tipo']=='enviado':
+             transferencias=Transferencia.objects.filter(conta_id=consulta['conta'],
+             data__gte=consulta['data_inicio'],data__lte=consulta['data_fim'])
+
         return transferencias

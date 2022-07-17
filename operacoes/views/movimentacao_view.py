@@ -8,7 +8,7 @@ from operacoes.serializers.movimentacao_serializer import MovimentacaoSerializer
 class MovimentacaoViewSet(viewsets.ModelViewSet):
     queryset =Movimentacao.objects.all()
     serializer_class = MovimentacaoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     # def get(self,request,*args,**kwargs):
     #     transferencias=self.get_queryset()
     #     # serializer=TransferenciaSerializer(transferencias,many=True)

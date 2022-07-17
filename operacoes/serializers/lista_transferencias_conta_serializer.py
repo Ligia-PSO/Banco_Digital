@@ -9,7 +9,6 @@ class ListaTransferenciasContaSerializer(serializers.ModelSerializer):
         model = Transferencia
         fields = [
             'conta',
-            'tipo',
             'quantidade',
             'beneficiario',
             'data'

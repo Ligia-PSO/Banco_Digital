@@ -1,15 +1,14 @@
 
-from re import T
 
 
-TRANSFERENCIA='transferencias'
-MOVIMENTACAO='movimentacoes'
+RECEBIDO='recebido'
+ENVIADO='enviado'
 TODOS='todos'
 
 
 TIPO_CONSULTA = [
-        (TRANSFERENCIA, 'Transferências'),
-        (MOVIMENTACAO, 'Movimentações'),
+        (RECEBIDO, 'Recebido'),
+        (ENVIADO, 'Enviado'),
         (TODOS,'Todos'),
         ]
 

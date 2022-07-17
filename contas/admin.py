@@ -1,6 +1,7 @@
 from django.contrib import admin
+
 from contas.models.cliente import Cliente
-from contas.models.conta import ContaBancaria
+from contas.models.contabancaria import ContaBancaria
 
 class ClienteAdmin(admin.ModelAdmin):
     list_display=('nome','tipo')
