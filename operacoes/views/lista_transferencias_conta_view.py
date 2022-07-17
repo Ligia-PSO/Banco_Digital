@@ -9,9 +9,7 @@ from django.db.models import Q
 class ListaTransferenciasViewset(generics.ListAPIView):
     def get_queryset(self):
         queryset = Transferencia.objects.filter(Q(beneficiario=self.kwargs['pk'])|Q(conta_id=self.kwargs['pk']))
+        
         return queryset
-
-    # def post(self, request, *args, **kwargs):
-    #     return self.list(request, *args, **kwargs)
 
     serializer_class = ListaTransferenciasContaSerializer

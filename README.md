@@ -1,11 +1,12 @@
 # Banco Digital
-> Banking Website built on Django designed with Bootstrap
-## Installation:
+> Sistema de Banco digital criado como parte do Desafio para a semifinal do Codigo[/s] da how
+
+## Instalação:
 **1.Clone Repo**
 ```sh
-git clone https://github.com/shyam999/ParagonBank.git
+git clone https://github.com/Ligia-PSO/Banco_Digital
 ```
-**2.Setup Virtualenv & Install Requirements**
+**2.Criar ambiente virtual & Requisitos de instalção**
 ```
 virtualenv env
 source env/bin/activate

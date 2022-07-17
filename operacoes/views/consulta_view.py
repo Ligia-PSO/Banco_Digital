@@ -1,7 +1,4 @@
 
-
-from contas.models.contabancaria import ContaBancaria
-from operacoes.models.movimentacao import Movimentacao
 from operacoes.models.transferencia import Transferencia
 from operacoes.serializers.consulta_serializer import ConsultarSerializer
 from operacoes.serializers.transferencia_serializer import TransferenciaSerializer
@@ -9,15 +6,14 @@ from operacoes.serializers.transferencia_serializer import TransferenciaSerializ
 from rest_framework import viewsets,permissions
 from rest_framework.response import Response
 from rest_framework import status
-from contas.models.contabancaria import ContaBancaria
 from django.db.models import Q
 from operacoes.models.transferencia import Transferencia
 from operacoes.serializers.transferencia_serializer import TransferenciaSerializer
-
+from django.http import HttpResponseRedirect
 
 
 class ConsultarViewSet(viewsets.ModelViewSet):
-    queryset =Movimentacao.objects.all()
+    queryset =Transferencia.objects.all()
     serializer_class = ConsultarSerializer
     # permission_classes = [permissions.IsAuthenticated]
     
@@ -25,9 +21,10 @@ class ConsultarViewSet(viewsets.ModelViewSet):
         return Response({'informe as datas a serem consultadas'},status=status.HTTP_200_OK)
     
     def create(self, request):#POST
+        consulta=request.data
         transf=self.filtrar_transferencias(request)#transferencias feitas no periodo
         serializer=TransferenciaSerializer(transf,many=True)
-            
+        
         return Response(serializer.data)
 
 
