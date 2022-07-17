@@ -1,3 +1,4 @@
+from multiprocessing import allow_connection_pickling
 from rest_framework import serializers
 import re
 from contas.models.conta import ContaBancaria
@@ -14,8 +15,7 @@ class ConsultarSerializer(serializers.Serializer):
 
     def validate_conta(self,conta):
         contas_cadastradas=[x['conta'] for x in ContaBancaria.objects.all().values()]
-        print(contas_cadastradas)
         if conta not in contas_cadastradas:
             raise serializers.ValidationError(
-                "conta nao existe")
+                "Conta nao existe")
         return conta

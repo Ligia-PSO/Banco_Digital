@@ -1,5 +1,4 @@
 
-import uuid
 import random
 from django.db import models
 from contas.constantes import CONTA_TIPO

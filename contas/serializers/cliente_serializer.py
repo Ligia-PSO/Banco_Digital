@@ -3,12 +3,13 @@ from contas.models.cliente import Cliente
 from contas.validators.campo import somente_inteiros, somente_letras
 
 
-class ClienteSerializer(serializers.ModelSerializer):
+class ClienteSerializer(serializers.HyperlinkedModelSerializer):
     cnpj=serializers.CharField(min_length=14,max_length=14,
                             allow_blank=False, allow_null=True,required=False,validators=[somente_inteiros])
 
     cpf = serializers.CharField(min_length=11,max_length=11,
                             allow_blank=False, allow_null=True,required=False,validators=[somente_inteiros])
+    
     nome= serializers.CharField(allow_null=False,validators=[somente_letras])
     endereco= serializers.CharField(allow_null=False,validators=[somente_letras])
    

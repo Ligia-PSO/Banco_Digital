@@ -6,11 +6,12 @@ from operacoes.models.transferencia import Transferencia
 
 # Serializers define the API representation.
 class TransferenciaSerializer(serializers.ModelSerializer):
-    tipo =serializers.CharField(read_only=True)
-
+    # tipo=serializers.ReadOnlyField()
+    # cliente = serializers.ReadOnlyField(source='cliente.nome')
+    
     class Meta():
         model = Transferencia
-        exclude = ('Transfer_id',)
+        exclude = ('Transfer_id','tipo')
         # fields='__all__'
 
     def validate_beneficiario(self, beneficiario):
