@@ -2,87 +2,40 @@ import json
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
-from rest_framework import permissions
-from django.contrib.auth.models import User
 
 from contas.models.cliente import Cliente
+from contas.models.contabancaria import ContaBancaria
 
-# from contas.models.cliente import Cliente
 
-# class TransferenciaTestCase(TestCase):
+class TransferenciaTestCase(TestCase):
 
-#     @classmethod
-#     def setUp(self) -> None:
+    @classmethod
+    def setUp(cls) -> None:
    
-#         client = APIClient()
+        client = APIClient()
 
-    # def test_cliente_post_sucesso(self):
+        cliente1 = {"nome": "Marcia","sobrenome": "Alvares","cpf":"12345670001","endereco":"rua teste",
+        "tipo":"PF"}
+        Cliente.objects.create(**cliente1)
+        cliente2 = {"nome": "Breno","sobrenome": "Alvares","cpf":"12345000001","endereco":"rua teste",
+        "tipo":"PF"}
+        Cliente.objects.create(**cliente2)
+
+        cls.titular_id1=Cliente.objects.get(cpf="12345670001").id
+        cls.titular_id2=Cliente.objects.get(cpf="12345000001").id
+
+        conta_bancaria1 = {"titular": str(cls.titular_id1),"saldo": "120","tipo":"S"}
+        conta_bancaria2 = {"titular": str(cls.titular_id2),"saldo": "120","tipo":"S"}
+
+        cls.conta1=ContaBancaria.objects.get(titular_id=cls.titular_id1).conta
+        cls.conta2=ContaBancaria.objects.get(titular_id=cls.titular_id2).conta
+
+        ContaBancaria.objects.create(**conta_bancaria1)
+        ContaBancaria.objects.create(**conta_bancaria2)
+
+    def test_cliente_post_sucesso(self):
     #     # dado
-    #     cliente = {"nome": "Marcia","sobrenome": "Alvares","cnpj":"12345670001234","endereco":"rua teste",
-    #     "tipo":"PJ"}
+        transf = {"beneficiario": self.conta1,"quantidade": "10","conta": self.conta2}
+        response = self.client.post('/transferencia',transf,format='json')
 
-    #     # quando
-    #     response = self.client.post('/cliente/', cliente, format='json')
-
-    #     # entao
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    # def test_cliente_create(self):
-    #     # dado
-    #     cliente = {"nome": "Marcia","sobrenome": "Alvares","cnpj":"12345670001234","endereco":"rua teste",
-    #     "tipo":"PJ"}
-
-    #     # quando
-    #     Cliente.objects.create(**cliente)
-    #     cliente_cadastrado = Cliente.objects.get(cnpj="12345670001234")
-
-    #     # entao
-    #     self.assertEqual(cliente_cadastrado.nome, 'Marcia')
-
-    # def test_cliente_cpf_tamanho_error(self):
-    #     # dado
-    #     cliente = {"nome": "Marcia",'cpf':'123456789011',"sobrenome": "Alvares","endereco":"rua teste",
-    #     "tipo":"PF"}
-
-    #     # quando
-    #     response = self.client.post('/cliente/', cliente, format='json')
-
-    #     # entao
-    #     self.assertEqual(json.loads(response.content), {
-    #             "cpf": ['Certifique-se de que este campo não tenha mais de 11 caracteres.']}
-    #     )
-    
-    # def test_cliente_cnpj_tamanho1_error(self):
-    #     cliente = {"nome": "Marcia","sobrenome": "Alvares","cnpj":"123456700012345","endereco":"rua teste",
-    #     "tipo":"PJ"}
-
-    # #     # quando
-    #     response = self.client.post('/cliente/', cliente, format='json')
-
-    # #     # entao
-    #     self.assertEqual(json.loads(response.content), {
-    #             "cnpj": ['Certifique-se de que este campo não tenha mais de 14 caracteres.']})
-
-    # def test_cliente_cnpj_tamanho2_error(self):
-    #     cliente = {"nome": "Marcia","sobrenome": "Alvares","cnpj":"1234567000123","endereco":"rua teste",
-    #     "tipo":"PJ"}
-
-    # #     # quando
-    #     response = self.client.post('/cliente/', cliente, format='json')
-
-    # #     # entao
-    #     self.assertEqual(json.loads(response.content), {
-    #             "cnpj": ['Certifique-se de que este campo tenha mais de 14 caracteres.']})
-
-    # def test_cliente_cnpj_int_error(self):
-    #     cliente = {"nome": "Marcia","sobrenome": "Alvares","cnpj":"1234567000123a","endereco":"rua teste",
-    #     "tipo":"PJ"}
-
-    # #     # quando
-    #     response = self.client.post('/cliente/', cliente, format='json')
-
-    # #     # entao
-    #     self.assertEqual(json.loads(response.content), {
-    #             "cnpj":["Campo somente pode conter numeros inteiros"]})
-
-    
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
