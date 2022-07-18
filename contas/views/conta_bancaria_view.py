@@ -14,19 +14,6 @@ class ContaBancariaViewSet(viewsets.ModelViewSet):
     queryset = ContaBancaria.objects.all()
     # permission_classes = [permissions.IsAuthenticated]
 
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-        filters.SearchFilter
-    ]
-    search_fields = ['conta','titular']
-    
-    # def list(self, request):
-    #     queryset = ContaBancaria.objects.all()
-    #     # return super().list(request)
-    #     return Response(ContaBancariaSerializer(queryset,many=True,context={'request': request}).data)
-    #     # return HttpResponse('<h1>please, enter your username</h1>')
-
     def create(self,request,*args,**kwargs):
         return super().create(request,*args,**kwargs)
 

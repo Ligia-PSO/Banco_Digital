@@ -20,18 +20,6 @@ class ClienteViewSet(viewsets.ModelViewSet):
     search_fields = ['nome','cpf','cnpj']
     ordering_fields = ['nome']
     
-
-    # def list(self, request):
-    #     clientes=Cliente.objects.all()
-    #     valores=Cliente.objects.all().values()
-
-    #     serializer=ClienteSerializer(clientes,many=True)
-    #     for x in valores:
-    #         print(x['id'])
-    #     print(serializer.data)
-        
-        
-        # return Response(serializer.data)
         
     def create(self,request,*args,**kwargs):
         return super().create(request,*args,**kwargs)
