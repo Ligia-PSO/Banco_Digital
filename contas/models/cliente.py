@@ -9,8 +9,6 @@ class Cliente(models.Model):
     nome = models.CharField(max_length=100,null=False)
     sobrenome=models.CharField(max_length=100,default='')
     endereco = models.CharField(max_length=100)
-    # email=models.EmailField()
-    telefone = models.CharField(max_length=11)
     cpf = models.CharField(max_length=11, null=True,unique=True)
     cnpj = models.CharField(max_length=14, null=True,unique=True)
     tipo = models.CharField(max_length=2, choices=CLIENTE_CHOICES)
