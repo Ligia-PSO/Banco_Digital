@@ -15,3 +15,7 @@ class ContaBancariaNotFoundError(DataBase_Error):
 class InvalidDate(InputError):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
+        
+class TransferenciaError(InputError):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
