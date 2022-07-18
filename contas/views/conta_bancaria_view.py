@@ -14,10 +14,9 @@ class ContaBancariaViewSet(viewsets.ModelViewSet):
     queryset = ContaBancaria.objects.all()
     # permission_classes = [permissions.IsAuthenticated]
 
-    
     def create(self,request,*args,**kwargs):
         return super().create(request,*args,**kwargs)
-        
+
 
     def retrieve(self, request, *args,**kwargs):
         params=kwargs
