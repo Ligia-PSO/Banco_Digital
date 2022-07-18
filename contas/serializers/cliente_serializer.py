@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from contas.exceptions.contas_database_error import DuplicatedCNPJ, DuplicatedCPF
 from contas.models.cliente import Cliente
 from contas.validadores import somente_inteiros, somente_letras, validar_cpf_cnpj
 
@@ -25,3 +26,17 @@ class ClienteSerializer(serializers.HyperlinkedModelSerializer):
         validar_cpf_cnpj(data)
 
         return data
+    
+    def validate_cpf(self,cpf):
+        cpf_cadastradas=[x['cpf'] for x in Cliente.objects.all().values()]
+        
+        if int(cpf)in cpf_cadastradas:
+            raise DuplicatedCPF({"cpf":"CPF ja cadastrado"})
+        
+        return cpf
+    
+    def validate_cnpj(self,cnpj):
+        cnpj_cadastradas=[x['cnpj'] for x in Cliente.objects.all().values()]
+        if int(cnpj)in cnpj_cadastradas:
+            raise DuplicatedCNPJ({"cnpj":'CPF ja cadastrada'})
+        return cnpj
