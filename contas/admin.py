@@ -13,4 +13,3 @@ class ContaBancariaAdmin(admin.ModelAdmin):
 
 admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(ContaBancaria,ContaBancariaAdmin)
-# Register your models here.

@@ -12,10 +12,3 @@ TIPO_CONSULTA = [
         (TODOS,'Todos'),
         ]
 
-DEPOSITO='D'
-SAQUE='S'
-
-TIPO_MOVIMENTACAO = [
-    (DEPOSITO, 'deposito'),
-    (SAQUE, 'saque'),
-]

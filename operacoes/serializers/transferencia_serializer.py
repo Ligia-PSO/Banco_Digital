@@ -1,13 +1,8 @@
 from rest_framework import serializers
-import re
 from contas.models.contabancaria import ContaBancaria
-from contas.validadores import somente_inteiros
 from operacoes.models.transferencia import Transferencia
 
-
-# Serializers define the API representation.
 class TransferenciaSerializer(serializers.ModelSerializer):
-    # quantidade=serializers.DecimalField(validators=[somente_inteiros])
     
     class Meta():
         model = Transferencia
@@ -28,9 +23,10 @@ class TransferenciaSerializer(serializers.ModelSerializer):
         return data
     
     def validate_quantidade(self, qtd):
+        if int(qtd)<0:
+            raise serializers.ValidationError("Quantidade de transferencia não pode ser negativa")
         if int(qtd)==0:
             raise serializers.ValidationError("Quantidade de transferencia não pode ser nula")
-        # contas_cadastradas=[x['conta'] for x in ContaBancaria.objects.all().values()]
         
         return qtd
     

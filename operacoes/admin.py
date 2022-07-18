@@ -1,5 +1,4 @@
 from django.contrib import admin
-from operacoes.models.movimentacao import Movimentacao
 from operacoes.models.transferencia import Transferencia
 
 class TransferenciaAdmin(admin.ModelAdmin):
@@ -11,5 +10,4 @@ class MovimentacaoAdmin(admin.ModelAdmin):
    
 
 admin.site.register(Transferencia,TransferenciaAdmin)
-admin.site.register(Movimentacao,MovimentacaoAdmin)
 # Register your models here.

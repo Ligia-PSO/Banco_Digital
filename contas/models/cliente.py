@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 
-from contas.constantes import CLIENTE_CHOICES, CLIENTE_GENERO
+from contas.constantes import CLIENTE_CHOICES
 
 class Cliente(models.Model):
     
@@ -14,7 +14,6 @@ class Cliente(models.Model):
     cpf = models.CharField(max_length=11, null=True,unique=True)
     cnpj = models.CharField(max_length=14, null=True,unique=True)
     tipo = models.CharField(max_length=2, choices=CLIENTE_CHOICES)
-    genero = models.CharField(max_length=2, choices=CLIENTE_GENERO)
 
     def __str__(self) -> str:
         return '{} {}'.format(self.nome, self.sobrenome)
