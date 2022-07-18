@@ -1,11 +1,13 @@
 # 💰 Banco Digital 💰
 > Sistema de Banco digital criado como parte do Desafio para a semifinal do Codigo[/s] da how
+_________
 
 <h2 align="left">conteudo </h2>
 
   - [Instalação](#instalação)
-  - [Funcionalidades](#funcionalidades)
   - [Base de dados](##base-de-dados)
+  - [listagem de urls habilitados](#listagem-de-urls-habilitados)
+  - [Funcionalidades](#funcionalidades)
   - [Documentação de apoio](#documentação-de-apoio)
   
 # Instalação:
@@ -28,11 +30,43 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+_______________________
 ## Base de Dados
 A base de dados do sistema final se econtra representada abaixo:
 
-![image](https://user-images.githubusercontent.com/86573930/179431291-5d2c8752-75dc-4067-88ec-eb99849805fd.png)
+![image](https://user-images.githubusercontent.com/86573930/179450349-98a804aa-6912-4d30-959d-b9c71481a8bf.png)
 
+________________________
+# Listagem de urls habilitados
+### Cadastro
+
+/contabancaria
+
+/cliente
+
+/transferencia
+
+### Consulta Base de Dados
+
+/contabancaria/[numero da conta]/saldo
+
+/contabancaria/[numero da conta]
+
+/contabancaria/todas
+
+/cliente/[id do cliente]
+
+
+### Consulta de Transferencias:
+
+/consultartransferencia
+
+/contabancaria/[numero da conta ]/transferencias
+
+/contabancaria/[numero da conta ]/transferencias/enviado
+
+/contabancaria/[numero da conta ]/transferencias/enviado
+_______________
 # Funcionalidades
 ## Tela inicial 
 ### /
@@ -52,7 +86,7 @@ pode ser cadastrado 3 tipos diferentes de contas sendo elas pupança salario e c
 ### Validações 
 # Cadastrar Cliente
 ### /cliente
-Pagina de cadastro do cliente
+Pagina de cadastro do cliente, possui diversas validaçoes para a conformidade dos campos , o botao de filtro pode ser usado para pesquisar por um cliente especifico por meio do seu cpf
 
 ![image](https://user-images.githubusercontent.com/86573930/179446193-1d5394ac-5e59-44b5-aa2d-20148d714f3b.png)
 
@@ -63,35 +97,34 @@ Consultar uma conta bancaria especifica
 Consultar um cliente especifico
 # Fazer uma transferencia 
 ### /transferencia
+
 ![image](https://user-images.githubusercontent.com/86573930/179430908-f371ff2f-037b-4139-a7c0-2db1931dd7f2.png)
 
-# Listar todas as contas bancarias
-Lista todas as Contas bancarias cadastradas
+Pagina de realização de transferencias nao permite transferencias de valor 0 nem negativos e avisa se nao ha saldo suficiente , tambem nao permite a transferencia de uma conta para si mesma. 
+## Listar todas as contas bancarias
+
 
 ### /contabancaria/todas
 ![image](https://user-images.githubusercontent.com/86573930/179430958-2f360ea6-263a-4221-950d-9709dcf31a08.png)
-
+Lista todas as Contas bancarias cadastradas
 ## Consultar saldo
 ### /contabancaria/[numero da conta]/saldo
 Retorna somente o saldo de uma conta estipulada
 
 # Consultar transferencias
 
-## Interface consultar tranferencias em um periodo
 ### /consultartransferencia
+![image](https://user-images.githubusercontent.com/86573930/179450666-daa35648-fd1f-401f-b15e-b9eece264c47.png)
 
-Intervafe para consultar transferencias realizadas por uma especifica conta bancaria dentro de um periodo de tempo podendo separálas por enviada e recebidas 
-
-![image](https://user-images.githubusercontent.com/86573930/179430789-a307b515-5bf9-485d-b1ac-65133b3d969d.png)
+Interface para consultar transferencias realizadas por uma especifica conta bancaria dentro de um periodo de tempo podendo separá-las por enviada e recebidas 
 
 ## Consultar transferencias específicas
 ### /contabancaria/[numero da conta ]/transferencias
-consulta todas as transferencias realizadas por uma dada  conta bancaria 
+Consulta todas as transferencias realizadas por uma dada  conta bancaria 
 ### /contabancaria/[numero da conta ]/transferencias/enviado
 Filtra as transferencias retornando somente as enviadas
 ### /contabancaria/[numero da conta ]/transferencias/recebido
 Filtra as transferencias retornando somente as recebidas
-
 
 # Documentação de apoio
 
@@ -99,4 +132,4 @@ Filtra as transferencias retornando somente as recebidas
 
 ### [django rest framework](https://www.django-rest-framework.org/)
 
-### [video demostrando a aplicação]()
+### [video demostrando a aplicação](https://youtu.be/_vOCj_L6T8w)
