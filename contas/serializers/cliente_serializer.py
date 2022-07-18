@@ -30,13 +30,13 @@ class ClienteSerializer(serializers.HyperlinkedModelSerializer):
     def validate_cpf(self,cpf):
         cpf_cadastradas=[x['cpf'] for x in Cliente.objects.all().values()]
         
-        if int(cpf)in cpf_cadastradas:
-            raise DuplicatedCPF({"cpf":"CPF ja cadastrado"})
+        if cpf in cpf_cadastradas and cpf!=None:
+            raise DuplicatedCPF("CPF ja cadastrado")
         
         return cpf
     
     def validate_cnpj(self,cnpj):
         cnpj_cadastradas=[x['cnpj'] for x in Cliente.objects.all().values()]
-        if int(cnpj)in cnpj_cadastradas:
-            raise DuplicatedCNPJ({"cnpj":'CNPJ ja cadastrada'})
+        if (cnpj in cnpj_cadastradas) and cnpj!=None:
+            raise DuplicatedCNPJ('CNPJ ja cadastrada')
         return cnpj

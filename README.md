@@ -29,6 +29,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 ## Base de Dados
+A base de dados do sistema final se econtra representada abaixo:
 
 ![image](https://user-images.githubusercontent.com/86573930/179431291-5d2c8752-75dc-4067-88ec-eb99849805fd.png)
 
@@ -51,11 +52,15 @@ pode ser cadastrado 3 tipos diferentes de contas sendo elas pupança salario e c
 ### Validações 
 # Cadastrar Cliente
 ### /cliente
+Pagina de cadastro do cliente
+
+![image](https://user-images.githubusercontent.com/86573930/179446193-1d5394ac-5e59-44b5-aa2d-20148d714f3b.png)
 
 ### /contabancaria/[numero da conta]
+Consultar uma conta bancaria especifica
 
-### /cliente/<id do cliente>
-
+### /cliente/[id do cliente]
+Consultar um cliente especifico
 # Fazer uma transferencia 
 ### /transferencia
 ![image](https://user-images.githubusercontent.com/86573930/179430908-f371ff2f-037b-4139-a7c0-2db1931dd7f2.png)

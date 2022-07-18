@@ -1,6 +1,7 @@
 from rest_framework import viewsets,permissions,filters
 from rest_framework.response import Response
 from rest_framework import status
+from contas.exceptions.contas_database_error import DuplicatedCPF
 from contas.models.cliente import Cliente
 
 
@@ -22,6 +23,7 @@ class ClienteViewSet(viewsets.ModelViewSet):
     
         
     def create(self,request,*args,**kwargs):
+        
         return super().create(request,*args,**kwargs)
 
     def retrieve(self, request, *args,**kwargs):
