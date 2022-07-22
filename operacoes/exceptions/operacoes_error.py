@@ -1,4 +1,6 @@
 
+from rest_framework.serializers import ValidationError
+
 from contas.exceptions.contas_database_error import DataBase_Error, InputError
 
 
