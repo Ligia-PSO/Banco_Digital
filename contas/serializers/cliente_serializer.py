@@ -38,5 +38,5 @@ class ClienteSerializer(serializers.HyperlinkedModelSerializer):
     def validate_cnpj(self,cnpj):
         cnpj_cadastradas=[x['cnpj'] for x in Cliente.objects.all().values()]
         if int(cnpj)in cnpj_cadastradas:
-            raise DuplicatedCNPJ({"cnpj":'CNPJ ja cadastrada'})
+            raise DuplicatedCNPJ({"cnpj":'CPF ja cadastrada'})
         return cnpj
