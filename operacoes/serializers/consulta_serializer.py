@@ -24,14 +24,12 @@ class ConsultarSerializer(serializers.Serializer):
         d1=datetime.strptime(data_i, "%Y-%m-%d").date()
         d2=datetime.strptime(data_f, "%Y-%m-%d").date()
         
+        if d1>hoje:
+            raise InvalidDate(
+                    {'data_inicio':'Data nao pode ser futura'})
         if d1>d2:
             raise InvalidDate(
                     {'data_inicio':'Data inicial nao pode ser depois da final'})
-            
-        elif d1>hoje:
-            raise InvalidDate(
-                    {'data_inicio':'Data nao pode ser futura'})
-        
 
         return data
 
